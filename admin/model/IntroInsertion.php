@@ -56,9 +56,9 @@ else {
        {
            echo $name;
         move_uploaded_file($_FILES["file"]["tmp_name"],
-        "../../Videos/intro/" . $namelink);
-        echo "Stored in: " . "../../Videos/intro/" . $namelink;
-        
+        "../../videos/intro/" . $namelink);
+        echo "Stored in: " . "../../videos/intro/" . $namelink;
+        echo "<script>confirm('Succeflly enterd',window.location='../IntroVideos.php')</script>";
        
        }
 

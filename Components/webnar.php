@@ -15,8 +15,8 @@ function web($id,$name,$discri,$videoname)
         }
         else{
      echo '
-       <img src="videos/'.$videoname.'"   width="320" height="215" alt="research" class="img-responsive">
-            <div class="research-details">
+       <img src="videos/'.$videoname.'"   width="320" height="215" alt="research" class="img-responsive">';}
+         echo '  <div class="research-details">
                 <a href="webdetails.php?'.$id.'">Click<i class="fa fa-angle-right" aria-hidden="true"></i></a>
             </div>
         </div>
@@ -24,7 +24,7 @@ function web($id,$name,$discri,$videoname)
     </div>
 </div>';
 
-} }
+} 
 
 $webaEnd = '</div></div>';
 
@@ -95,16 +95,25 @@ echo '<div class="sidebar-box">
         <ul>';
     }
         function related($id,$name,$videoName){ 
+            $ext = pathinfo($videoName, PATHINFO_EXTENSION);
            echo ' <li>
                 <div class="related-img">
-                    <a href="#">
-                    <video id="iframeId" width="80" height="80" src="videos/'.$videoName.'" frameborder="0" volume="0" allow-scripts></video></a>
-                </div>
+                    <a href="#">';
+                    if($ext=="mp4")
+                    {
+                      echo ' <video id="iframeId" width="80" height="80" src="videos/'.$videoName.'" frameborder="0" volume="0" allow-scripts></video></a>';
+                    }
+                    else{
+                   echo  '<img  width="80" height="80" src="videos/'.$videoName.'"></a></img>';
+                }
+              echo ' </div>
                 <div class="related-content">
                     <h4><a href="webdetails.php?'.$id.'">'.$name.'</a></h4>
                     <p></p>
                 </div>
-            </li>';}
+            </li>';
+        }
+
             function relEnd(){
                 echo'    </ul>
     </div>
@@ -121,13 +130,17 @@ $courseAreadHead =' <div class="courses-page-area3">
             ';
            
    function VideoArea($videoName,$name,$discri){
-       echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-       <!--<img src="img/course/15.jpg" class="img-responsive" alt="course">-->
-       <iframe width="818" id="iframeId" height="475" src="videos/'.$videoName.'" frameborder="0" allowfullscreen allow-scripts></iframe>
-       <div class="course-details-inner">
+    $ext = pathinfo($videoName, PATHINFO_EXTENSION);
+       echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
+       if($ext=='mp4'){
+       echo ' <iframe width="818" id="iframeId" height="475" src="videos/'.$videoName.'" frameborder="0" allowfullscreen allow-scripts></iframe>';
+    }
+    else {
+      echo '<img src="videos/'.$videoName.'" class="img-responsive" alt="course">';}
+     echo '<div class="course-details-inner">
            <h2 class="title-default-left title-bar-high">'.$name.'</h2>
            <p>'.$discri.'</p>';
-   }     
+      } 
    function details($sectionid,$name,$designation){
        echo '<h3 class="sidebar-title">Course Features</h3>
        <ul class="course-feature">
@@ -147,7 +160,7 @@ $courseAreadHead =' <div class="courses-page-area3">
 
         echo '<div class="media">
         <a href="#" class="pull-left">
-            <img alt="Comments" src="img/course/16.jpg" class="media-object">
+            <img alt="Comments" src="img/students/comment.png" style="height:50px" class="media-object">
         </a>
         <div class="media-body">
             <h3><a href="#">'.$name.'</a></h3>

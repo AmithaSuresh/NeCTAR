@@ -14,7 +14,7 @@ if(isset($_POST['user']))
    $result = mysqli_fetch_array($userdetails);
    if($result == true)
    {
-    echo "<script>confirm('There is email is already exisit',window.location='../userinfo.php')</script>";
+    echo "<script>confirm('There is email is already exisit',window.location='../userInfo.php')</script>";
     
    }
    else
@@ -24,7 +24,7 @@ if(isset($_POST['user']))
 
 
 
- $target_dir = "..\Images/";
+ $target_dir = "..\images/";
  $target_file = $target_dir . basename($_FILES["photo"]["name"]);
 
  $name = $email;
@@ -66,17 +66,17 @@ if(isset($_POST['user']))
  // if everything is ok, try to upload file
  } else {
      //if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        if(move_uploaded_file($_FILES["photo"]["tmp_name"], "../../Images/profile/" . $newfilename.'.jpg')){
+        if(move_uploaded_file($_FILES["photo"]["tmp_name"], "../../images/profile/" . $newfilename.'.jpg')){
          echo "The file ". basename( $_FILES["photo"]["name"]). " has been uploaded.";
          //header('Location:../Shop_CategorieInsertion.php');
-         echo "<script>confirm('profile Image Uploaded',window.location='../userinfo.php')</script>";
+         echo "<script>confirm('profile Image Uploaded',window.location='../userInfo.php')</script>";
      } else {
          echo "Sorry, there was an error uploading your file.";
      }
      
     }
     //..........abstract....
-    $target_dir = "..\Images/";
+    $target_dir = "..\images/";
     $target_file = $target_dir . basename($_FILES["Abstract"]["name"]);
    
     $name =$email;
@@ -110,7 +110,7 @@ if(isset($_POST['user']))
            if(move_uploaded_file($_FILES["Abstract"]["tmp_name"], "../../Abstract/" . $newfilename.'.pdf')){
             echo "The file ". basename( $_FILES["Abstract"]["name"]). " has been uploaded.";
             $update=mysqli_query($con,"UPDATE `user_info` SET `Abstract`='$newfilename' where `Email_ID`='$name' ");
-            echo "<script>confirm('Abstract Uploaded',window.location='../userinfo.php')</script>";
+            echo "<script>confirm('Abstract Uploaded',window.location='../userInfo.php')</script>";
             } else {
             echo "Sorry, there was an error uploading your file.";
                 }
@@ -118,6 +118,78 @@ if(isset($_POST['user']))
         } 
    
     }
+
+
+
+
+//SMTP needs accurate times, and the PHP time zone MUST be set
+ //This should be done in your php.ini, but this is how to do it if you don't have access to that
+ date_default_timezone_set('Etc/UTC');
+  
+ require '../PHPMailerAutoload.php';
+  
+ //Create a new PHPMailer instance
+ $mail = new PHPMailer();
+ //Tell PHPMailer to use SMTP
+ $mail->isSMTP();
+ //Enable SMTP debugging
+ // 0 = off (for production use)
+ // 1 = client messages
+ // 2 = client and server messages
+ $mail->SMTPDebug   = 2;
+ $mail->DKIM_domain = 'nectar2020.in';
+ //Ask for HTML-friendly debug output
+ $mail->Debugoutput = 'html';
+ //Set the hostname of the mail server
+ $mail->Host        = "smtpout.secureserver.net";
+ //Set the SMTP port number - likely to be 25, 465 or 587
+ $mail->Port        = 465;
+ //Whether to use SMTP authentication
+ $mail->SMTPAuth    = true;
+ //Username to use for SMTP authentication
+ $mail->Username    = "noreplay@nectar2020.in";
+ //Password to use for SMTP authentication
+ $mail->Password    = "W@mKC7Fy+Ek!";
+ $mail->SMTPSecure  = 'ssl';
+ //Set who the message is to be sent from
+ $mail->setFrom('noreplay@nectar2020.in', 'First Last');
+ //Set an alternative reply-to address
+ //$mail->addReplyTo('replyto@example.com', 'First Last');
+ //Set who the message is to be sent to
+ $mail->addAddress($email, $name);
+ //Set the subject line
+ $mail->Subject = 'PHPMailer SMTP test';
+ //Read an HTML message body from an external file, convert referenced images to embedded,
+ //convert HTML into a basic plain-text alternative body
+ //$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
+ $mail->msgHTML('Thank You For Registeing In Nectar2020');
+ //Replace the plain text body with one created manually
+ $mail->AltBody = 'Thank You For Registeing In Nectar2020 .';
+ //Attach an image file
+ //$mail->addAttachment('images/phpmailer_mini.png');
+  
+ //send the message, check for errors
+ if (!$mail->send()) {
+     echo "Mailer Error: " . $mail->ErrorInfo;
+ } else {
+     echo "Message sent!";
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 //-----Paper insertion------------------
@@ -141,7 +213,7 @@ if(isset($_POST['paper']))
     $query = mysqli_query($con,"SELECT * from `papers` where `Email`='$email'");
     $row6 = mysqli_fetch_array($query);
     if($row6 ==true){
-      echo "<script>confirm('You already uploaded paper ',window.location='')</script>";
+      echo "<script>confirm('You already uploaded paper ',window.location='../userInfo.php')</script>";
    }
     else 
     {
@@ -159,7 +231,7 @@ if(isset($_POST['paper']))
 
 
 
- $target_dir = "..\Images/";
+ $target_dir = "..\images/";
  $target_file = $target_dir . basename($_FILES["pdf"]["name"]);
 
  $name =$id.'-'.$heading;
@@ -236,8 +308,8 @@ if(isset($_POST['paper']))
          {
              echo $name;
           move_uploaded_file($_FILES["file"]["tmp_name"],
-          "../../Videos/" . $namelink);
-          echo "Stored in: " . "../../Videos/" . $namelink;
+          "../../videos/" . $namelink);
+          echo "Stored in: " . "../../videos/" . $namelink;
           
           $update =  mysqli_query($con,"UPDATE `papers` SET   `Link_ID` = '$namelink' where Paper_ID='$id'");
          }
@@ -248,7 +320,7 @@ if(isset($_POST['paper']))
      {
        echo "Invalid file";
      }
-     echo "<script>confirm('Succeflly enterd',window.location='../Userinfo.php')</script>";
+     echo "<script>confirm('Succeflly enterd',window.location='../userInfo.php')</script>";
 }
     function Dis()
     {

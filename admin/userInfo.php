@@ -37,13 +37,13 @@ echo $formEnd;
 
 
 
-formHead('paper','model/userInfo.php');
+formHead('paper','model/userinfo.php');
 input('Heading','text');
 textArea('Description1');
 input('Email','text');
 //input('Youtube','text');
 select('Section');
-$query = mysqli_query($con,"SELECT * From `Sections`");
+$query = mysqli_query($con,"SELECT * From `sections`");
 while($row=mysqli_fetch_array($query)){
     echo '<option value='.$row[2].'>'.$row[1].'';
 }

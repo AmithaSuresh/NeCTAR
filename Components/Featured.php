@@ -9,7 +9,7 @@
      <div class="container courses-list-wrapper">
          <div class="row courses-wrapper courses-list">';
 
-$start2 =' <div class="courses1-area" id="section">
+$start2 =' <div class="courses1-area" id="sec">
 <div class="container">
     <h2 class="title-default-left">Paper Sections</h2>
 </div>
@@ -81,7 +81,7 @@ $image = 'img/featured/back.jpg';
 function featured2Head(){
     echo '<div class="featured-area bg-common-style" style="background-image: url('.$GLOBALS['image'].');">
     <div class="container">
-        <h2 class="title-default-textPrimary-left">Featured Courses</h2>
+        <h2 class="title-default-textPrimary-left">....</h2>
     </div>
     <div class="container">
         <div class="row featured-wrapper" id="gallery-wrapper">';
