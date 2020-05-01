@@ -22,7 +22,7 @@ function test1($name,$id,$shorname){
     echo '<div class="courses-box1" onclick="view('.$id.')">
     <div class="single-item-wrapper">
         <div class="courses-img-wrapper hvr-bounce-to-bottom">
-            <img style="height:160px;" class="img-responsive" style="object-fit: cover;" src="images/section/'.$id.'.jpg" alt="courses">
+            <img style="height:160px;width:300px;" class="img-responsive"  src="images/section/'.$id.'.jpg" alt="courses">
             <a href="callforpaper.php"><i class="fa fa-link" aria-hidden="true"></i></a>
         </div>
         <div class="courses-content-wrapper">
@@ -81,7 +81,7 @@ $image = 'img/featured/back.jpg';
 function featured2Head(){
     echo '<div class="featured-area bg-common-style" style="background-image: url('.$GLOBALS['image'].');">
     <div class="container">
-        <h2 class="title-default-textPrimary-left">....</h2>
+        <h2 class="title-default-textPrimary-left">Defining Nectar</h2>
     </div>
     <div class="container">
         <div class="row featured-wrapper" id="gallery-wrapper">';
